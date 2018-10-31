@@ -11,8 +11,9 @@ import java.lang.StringBuilder
 
 class MainActivity : AppCompatActivity()
 {
+    //val filename = "onlinedata.txt"
     val filename = "testfile.txt"
-    val content = "Dette er en test!\n"
+    val content = "Dette er en seriøs test!\n"
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -20,11 +21,9 @@ class MainActivity : AppCompatActivity()
         setContentView(R.layout.activity_main)
 
         val fh = fileHandler()
-        //fh.setDataFile(filename, content)
-        //txtView.setText(fh.getDataFile(filename))
+        fh.setDataFile(filename, content, applicationContext)
 
-        writeFile(filename, content)
-        val ret_val : String = readFile(filename)
+        val ret_val : String = fh.getDataFile(filename, applicationContext)
         txtView.setText(ret_val)
     }
 

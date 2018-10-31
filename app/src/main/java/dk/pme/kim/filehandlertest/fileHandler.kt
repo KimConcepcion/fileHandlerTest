@@ -10,23 +10,21 @@ import java.io.FileOutputStream
 import java.io.InputStreamReader
 import java.lang.StringBuilder
 
-open class fileHandler : AppCompatActivity()
+class fileHandler
 {
-    fun setDataFile(file_name : String, file_content : String)
+    fun setDataFile(file_name : String, file_content : String, context : Context)
     {
-        val file = File(Environment.getExternalStorageDirectory(), file_name)
-        val fos : FileOutputStream = FileOutputStream(file)
-        fos.write(file_content.toByteArray())
-        fos.close()
+        context.openFileOutput(file_name, Context.MODE_PRIVATE).use{
+            it.write(file_content.toByteArray())
+        }
     }
 
-    fun getDataFile(file_name : String) : String
+    fun getDataFile(file_name : String, context : Context) : String
     {
-        val file = InputStreamReader(openFileInput(file_name))
+        val file = InputStreamReader(context.openFileInput(file_name))
         val br = BufferedReader(file)
         var line = br.readLine()
         val all = StringBuilder()
-
         while(line != null)
         {
             all.append(line + "\n")
@@ -35,6 +33,7 @@ open class fileHandler : AppCompatActivity()
 
         br.close()
         file.close()
+
         return all.toString()
     }
 }
