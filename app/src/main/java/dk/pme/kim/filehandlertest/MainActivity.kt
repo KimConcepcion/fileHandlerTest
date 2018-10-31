@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity()
         val fh = fileHandler()
         fh.setDataFile(filename, content, applicationContext)
 
+        fh.appendDataFile(filename, "Dette er en lille test!\n", applicationContext)
+
         val ret_val : String = fh.getDataFile(filename, applicationContext)
         txtView.setText(ret_val)
     }

@@ -12,6 +12,7 @@ import java.lang.StringBuilder
 
 class fileHandler
 {
+    //  Write to a file, but delets former content:
     fun setDataFile(file_name : String, file_content : String, context : Context)
     {
         context.openFileOutput(file_name, Context.MODE_PRIVATE).use{
@@ -19,6 +20,15 @@ class fileHandler
         }
     }
 
+    //  Append a file:
+    fun appendDataFile(file_name : String, append_text : String, context : Context)
+    {
+        context.openFileOutput(file_name, Context.MODE_APPEND).use{
+            it.write(append_text.toByteArray())
+        }
+    }
+
+    //  Read the file, line by line:
     fun getDataFile(file_name : String, context : Context) : String
     {
         val file = InputStreamReader(context.openFileInput(file_name))
